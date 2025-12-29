@@ -15,8 +15,11 @@ model Registration {
   grade             String
   events            String[] // Array of selected events
   physicsCourses    String[] // Array of selected physics courses
+  physicsOther      String?  // Custom physics course if "Other" selected
   mathCourses       String[] // Array of selected math courses
+  mathOther         String?  // Custom math course if "Other" selected
   meetingPreference String[] // Array of selected meeting preferences
+  meetingOther      String?  // Custom meeting preference if "Other" selected
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 

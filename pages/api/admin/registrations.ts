@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import bcrypt from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
 
 export default async function handler(
@@ -10,8 +11,15 @@ export default async function handler(
   }
 
   const { password } = req.body;
+  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
 
-  if (password !== process.env.ADMIN_PASSWORD) {
+  if (!passwordHash) {
+    console.error('ADMIN_PASSWORD_HASH not configured');
+    return res.status(500).json({ error: 'Server configuration error' });
+  }
+
+  const isValid = await bcrypt.compare(password, passwordHash);
+  if (!isValid) {
     return res.status(401).json({ error: 'Invalid password' });
   }
 

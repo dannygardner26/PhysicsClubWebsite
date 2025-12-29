@@ -17,8 +17,11 @@ export default async function handler(
       grade,
       events,
       physicsCourses,
+      physicsOther,
       mathCourses,
+      mathOther,
       meetingPreference,
+      meetingOther,
     } = req.body;
 
     // Validation
@@ -43,8 +46,11 @@ export default async function handler(
         grade,
         events: events || [],
         physicsCourses: physicsCourses || [],
+        physicsOther: physicsOther || null,
         mathCourses: mathCourses || [],
+        mathOther: mathOther || null,
         meetingPreference: meetingPreference || [],
+        meetingOther: meetingOther || null,
       },
     });
 
